@@ -1,0 +1,82 @@
+{% if msg %}
+    <script>alert("{{ msg }}");</script>
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Doc Login</title>
+
+    <link rel="stylesheet" href="../../static/css/login.css">
+    <script src="../../static/js/login.js"></script>
+    
+
+</head>
+<body>
+  {% csrf_token %}
+   <!-- <div class="back-btn">
+    <a href="./index.html"></a> 
+  </div>  -->
+  <div class="login-box">
+    <h2 id="txt">Login</h2>
+    <form id="login-form" action="/postsign/" method="post">
+      {% csrf_token %}
+      <div class="user-box">
+        <input type="email" name="email" required="">
+        <label>Email</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="password" required="">
+        <label>Password</label>
+      </div>
+      <!-- Sign up link -->
+      <div class="user-box">
+        <p onclick="showSignUpForm()">Don't have an account? Sign Up</p>
+      </div>
+      <!-- Login button -->
+      <!-- <a href="/postsign/"></a> -->
+      <input class="btn" type="submit" value="Log in">
+    
+    </form>
+  
+
+   
+   <form id="signup-form" action="/postsignup/" method="post" style="display:none;">
+    <!-- Sign up fields -->
+    {% csrf_token %}
+    <div class="user-box">
+      <input type="text" name="sign_name" required="">
+      <label>Name</label>
+    </div>
+    <div class="user-box">
+      <input type="email" name="sign_email" required="">
+      <label>Email address</label>
+    </div>
+
+    <div class="user-box">
+      <input type="number" name="phone" required="">
+      <label>Phone number</label>
+    </div>
+
+
+    <div class="user-box">
+      <input type="password" name="sign_pass" required="">
+      <label>Password</label>
+    </div>
+    <!-- Login link -->
+    <div class="user-box">
+      <p onclick="showLoginForm()">Already have an account? Log in</p>
+    </div>
+    <!-- Sign up button -->
+    <input class="btn" type="submit" value="Sign Up">
+    <!-- <a href="#">Sign Up</a> -->
+  </form>
+
+</div>
+
+
+</body>
+</html>

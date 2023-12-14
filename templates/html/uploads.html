@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Doc</title>
+  <link rel="stylesheet" href="../../static/css/homepage.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  
+  <link href="../../static/css/uploads.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/viewerjs/dist/viewer.css">
+<script src="https://unpkg.com/viewerjs/dist/viewer.js"></script>
+<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+
+</head>
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            z-index: 1;
+        }
+    #fileIframe {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+<body>
+
+   <input type="checkbox" id="menu-toggle">
+    <div class="sidebar">
+        <div class="side-header">
+            <h3><img src="../../static/assets/images/q.png" height="25px" width="25px"><span>uick Doc</span></h3>
+        </div>
+        
+        <div class="side-content">
+            <div class="profile">
+                {% if request.session.img == "#" %}
+                <div class="profile-img bg-img" style="background-image: url(../../static/assets/images/profile.webp);background-position: center;"></div>
+                {% else %}
+                <div class="profile-img bg-img" style="background-image: url('{{ request.session.img }}'); background-position: center;"></div>
+                {% endif %}
+            <!-- <div class="profile-img bg-img" style="background-image: url(../../static/assets/images/profile.webp);background-position: center;"></div> -->
+            <h4>{{ request.session.name }}</h4>
+          
+        </div>
+
+            <div class="side-menu">
+                <ul>
+
+                    <li>
+                       <a href="/home/">
+                            <span class="las la-home"></span>
+                            <small>Home Page</small>
+                        </a>
+                    </li>
+
+                    <li>
+                       <a href="" class="active">
+                            <span class="las la-file-alt"></span>
+                            <small>Uploads</small>
+                        </a>
+                    </li>
+
+                    <li>
+                       <a href="/viewProfile/">
+                            <span class="las la-user-alt"></span>
+                            <small>Profile</small>
+                        </a>
+                    </li>
+       
+                    <li>
+                       <a href="/logout/">
+                            <span class="las la-sign-out-alt"></span>
+                            <small>Signout</small>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="header-content">
+                <label for="menu-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                
+                <div class="header-menu">
+                    <label for="">
+                      
+                    </label>
+                   
+
+                    
+                    
+                    <div class="user">
+                        <div class="bg-img" style="background-image: url()"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        
+        <main>
+
+            
+            <div class="page-header">
+                <h1 style="font-size: 25px;text-align:center;">My Uploads</h1>
+            </div>
+              <!--  -->
+              <div class="items">
+                {% for user_object in user_objects %}
+                    <div class="item">
+                        <img src="{{ user_object.f_link }}" onerror="this.onerror=null;this.src='../../static/assets/images/im.png';">
+                        <div class="item-details">
+                            <h3 style="padding: 10px;">{{ user_object.file_name }}</h3>
+                        </div>
+                    
+
+                        <div class="price">
+                            <a href="{{ user_object.f_link }}"><button>Open</button></a>
+                            <!-- <div class="dot" onclick="toggleMenu('menu{{ loop.index }}')" data-menu="menu{{ loop.index }}" style="margin-left: 15px; height: 28px; width: 28px; border-radius: 15px;">
+                                <img style="height: 23px; width: 23px; padding-top: 10px;" src="../../static/assets/images/tdot.png">
+                            </div> -->
+                            <div class="dropdown">
+                                 <div class="dot" onclick="toggleMenu('menu{{ loop.index }}')" data-menu="menu{{ loop.index }}" style="margin-left: 15px; height: 28px; width: 28px; border-radius: 15px;">
+                                <img style="height: 23px; width: 23px; padding-top: 10px;" src="../../static/assets/images/tdot.png">
+                                </div> 
+                                <div class="dropdown-content">
+                            
+                                        {% csrf_token %}
+                                
+                                    <!-- <a onclick="showDocumentPreview('{{user_object.f_link}}')">Preview</a> -->
+                                    <a onclick="toggleIframe('{{user_object.f_link}}')">Preview</a>
+
+                                    <a href="{{user_object.f_link}}" download>Download</a>
+                                    <a onclick="showPopup('{{user_object.file_name}}','{{user_object.doc_id}}')">Rename</a>
+                                
+                                   
+                                </div>
+
+                        
+                              </div>
+                            
+                            
+                              
+                              <style>
+                                .dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+                              </style>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            
+
+
+
+            </div>
+            
+            
+
+        </div>
+
+        <script>
+            function toggleIframe(fileURL) {
+                var iframe = document.getElementById('fileIframe');
+        
+                if (iframe.style.display === 'none') {
+                    showDocumentPreview(fileURL)
+                    iframe.style.display = 'block';
+
+                } else {
+                   
+                    iframe.style.display = 'none';
+                }
+            }
+        </script>
+        <script>
+            function showDocumentPreview(fileURL) {
+              loadFileIntoIframe(fileURL);
+            }
+        
+            function loadFileIntoIframe(fileURL) {
+              var googleDocsViewerURL = "https://docs.google.com/gview?url=" + encodeURIComponent(fileURL) + "&embedded=true";
+              document.getElementById('fileIframe').src = googleDocsViewerURL;
+            }
+          </script>
+
+<div id="popup">
+    <form id="renameForm" method="post" action="/test/">
+        {% csrf_token %}
+        <label for="newFileName">New File Name:</label>
+        <input type="text" id="newFileName" name="newFileName">
+        <input type="hidden" id="doc_id" name="doc_id">
+        <button type="button" onclick="renameFile()">Save</button>
+        <button type="button" onclick="hidePopup()">Cancel</button>
+    </form>
+</div>
+
+          <iframe id="fileIframe" width="600" height="400" frameborder="0" scrolling="no"></iframe>
+        </main> 
+        
+    </div>
+    <script src="../../static/js/homepage.js"></script>
+    <script>
+        function showPopup(fname,docid) {
+            // document.getElementById('newFileName').value = fname;
+            document.getElementById('doc_id').value = docid;
+
+            document.getElementById('popup').style.display = 'block';
+        }
+    
+        function hidePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    
+        function renameFile() {
+            var form = document.getElementById('renameForm');
+            // document.getElementById('newFileName').value = fname;
+            form.submit();
+    
+            hidePopup();
+        }
+    </script>
+</body>
+</html>
+

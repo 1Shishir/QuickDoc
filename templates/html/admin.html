@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" title="Coding design">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Panel</title>
+
+    <link rel="stylesheet" href="../../static/css/admin.css">
+    <script src="../../static/js/admin.js"></script>
+</head>
+<style>
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            max-width: 80%;
+            width: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .popup-container h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .popup-container .profile-img {
+            max-width: 100px;
+            height: auto;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+
+        .popup-container p {
+            margin: 10px 0;
+        }
+
+        .popup-container .label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333; /* Added color for label */
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .popup-container .close-btn {
+            cursor: pointer;
+            color: #333;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+        }
+    </style>
+
+<body>
+    <main class="table">
+        <section class="table__header">
+            <h1 style="display: flex; align-items: center;justify-content: center;">Users</h1>
+            <div class="input-group">
+                <a href="/logout/">Log out</a>
+            </div>
+            
+        </section>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Profile <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Email <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Name <span class="icon-arrow">&UpArrow;</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+            
+                    <tbody>
+                 
+{% for user_object in user_objects %}
+    <tr>
+        <td> <img src="{{ user_object.img }}" alt=""></td>
+        <td> {{ user_object.email }} </td>
+        <td> {{ user_object.name }} </td>
+        <td>
+            <button onclick="showPopup('{{ user_object.name }}','{{ user_object.email }}','{{ user_object.dob }}','{{ user_object.phone}}')" class="show-details-btn" data-dob="{{ user_object.dob }}" data-email="{{ user_object.email }}" data-img="{{ user_object.img }}" data-name="{{ user_object.name }}" data-phone="{{ user_object.phone }}">
+                Show Details
+            </button> 
+        </td>
+        <td>
+        <form id="deleteUserForm" method="POST" action="/deleteUser/">
+            {% csrf_token %}
+            <input type="hidden" name="em" value="{{ user_object.email }}">
+            <input type="hidden" name="pass" value="{{ user_object.pass }}">
+            <button type="submit">Delete</button>
+        </form>
+    </td>
+    </tr>
+{% endfor %}
+
+                    </tbody>
+             
+                </tbody>
+            </table>
+       
+        </section>
+
+        <div class="overlay" id="overlay"></div>
+        <div class="popup-container" id="popupContainer">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>User Information</h2>
+            <p id="u_name" class="label"><strong>Name:</strong></p>
+            <p id="u_email" class="label"><strong>Email:</strong></p>
+            <p id="u_dob" class="label"><strong>Date of Birth:</strong></p>
+            <p id="u_phone" class="label"><strong>Phone:</strong></p>
+        </div>
+
+    </main>
+    <script>
+        
+        function showPopup(name,email,dob,phone) {
+            document.getElementById('popupContainer').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+
+            document.getElementById('u_name').innerText=name;
+            document.getElementById('u_email').innerText=email;
+            document.getElementById('u_dob').innerText=dob;
+            document.getElementById('u_phone').innerText=phone;
+            
+        }
+
+ 
+        function closePopup() {
+            document.getElementById('popupContainer').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        document.getElementById('showPopupBtn').addEventListener('click', showPopup);
+
+    
+    </script>
+    
+</body>
+
+
+</html>

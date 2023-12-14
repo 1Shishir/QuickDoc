@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Doc</title>
+  
+  <link rel="stylesheet" href="../../static/css/homepage.css">
+  <link rel="stylesheet" href="../../static/css/profile.css">
+
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"> 
+
+</head>
+<body>
+
+{% if u_obj %}
+{% endif %}
+
+   <input type="checkbox" id="menu-toggle">
+    <div class="sidebar">
+        <div class="side-header">
+            <h3><img src="../../static/assets/images/q.png" height="25px" width="25px"><span>uick Doc</span></h3>
+        </div>
+        
+        <div class="side-content">
+            <div class="profile">
+                <!-- <div class="profile-img bg-img" style="background-image: url(../../static/assets/images/profile.webp);background-position: center;"></div> -->
+                
+                {% if u_obj.0.img == "#" %}
+                <div class="profile-img bg-img" style="background-image: url(../../static/assets/images/local_profile_pic.webp); background-position: center;"></div>
+                {% else %}
+                <div class="profile-img bg-img" style="background-image: url('{{ u_obj.0.img }}'); background-position: center;"></div>
+               {% endif %}
+
+                <h4>{{ request.session.name }}</h4>
+              
+            </div>
+
+            <div class="side-menu">
+                <ul>
+
+                    <li>
+                       <a href="/home/">
+                            <span class="las la-home"></span>
+                            <small>Home Page</small>
+                        </a>
+                    </li>
+
+                    <li>
+                       <a href="/myuploads/">
+                            <span class="las la-file-alt"></span>
+                            <small>Uploads</small>
+                        </a>
+                    </li>
+                    <li>
+                       <a href="" class="active">
+                            <span class="las la-user-alt"></span>
+                            <small>Profile</small>
+                        </a>
+                    </li>
+                
+                    <li>
+                       <a href="/logout/">
+                            <span class="las la-sign-out-alt"></span>
+                            <small>Signout</small>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="header-content">
+                <label for="menu-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                
+                <div class="header-menu">
+                    <label for="">
+                      
+                    </label>
+                   
+
+                    
+                    
+                    <div class="user">
+                        <div class="bg-img" style="background-image: url()"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        
+        <main>
+            
+            <div class="page-header">
+                <h1 style="font-size: 25px;text-align:center;">Profile</h1>
+            </div>
+    
+<!--  -->
+
+ 
+       
+<div class="update-profile">
+ 
+    <form action="/updateProfile/" method="post" enctype="multipart/form-data">
+       <!-- <img style="height: 100px;width: 100px;object-fit:contain;" src="../../static/assets/images/profile.png"> -->
+       {% csrf_token %}
+       <div class="side-content" >
+        
+        <div class="profile" style="margin: 5px; padding: 5px;">
+            {% if u_obj.0.img == "#" %}
+                <!-- Show local saved profile pic -->
+                <div class="profile-img bg-img" style="background-image: url(../../static/assets/images/local_profile_pic.webp); background-position: center; height: 100px; width: 100px;"></div>
+            {% else %}
+                <!-- Show the provided link -->
+                <div class="profile-img bg-img" style="background-image: url('{{ u_obj.0.img }}'); background-position: center; height: 100px; width: 100px;"></div>
+            {% endif %}
+        </div>
+        
+       <!-- <?php 
+          if($fetch['image'] == ''){
+             echo '';
+          }else{
+             echo '<img src="uploaded_img/'.$fetch['image'].'">';
+          }
+          if(isset($message)){
+             foreach($message as $message){
+                echo '<div class="message">'.$message.'</div>';
+             }
+          }
+       ?> -->
+  
+       <div class="flex">
+          <div class="inputBox">
+             <span>Name :</span>
+             <input type="text" name="update_name" value="{{u_obj.0.name}}" class="box" required>
+             <span>Email :</span>
+             <input type="email" name="update_email" value="{{u_obj.0.email}}" style="background-color: rgb(90, 90, 90)a4a;" class="box" readonly required>
+             <span>update your avater :</span>
+             <input type="file" name="img" accept="image/jpg, image/jpeg, image/png" class="box">
+          </div>
+          <div class="inputBox">
+           
+             <span>Phone Number:</span>
+             <input type="number" name="update_phone" value="{{u_obj.0.phone}}" class="box" required>
+
+             <span>Date of Birth :</span>
+             <input type="date" name="update_dob" value="{{u_obj.0.dob}}" class="box" required>
+              
+             <span>Password :</span>
+             <input type="password" name="confirm_pass" placeholder="password" class="box" required>
+            
+            </div>
+
+       </div>
+       <input type="submit" value="update profile" name="update_profile" class="btn">
+      
+    </form>
+ 
+ </div>
+      
+  
+
+
+        </main> 
+        
+    </div>
+
+    <script src="../../static/js/homepage.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Doc</title>
+  <link rel="stylesheet" href="../../static/css/homepage.css">
+  <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
+
+   <input type="checkbox" id="menu-toggle">
+    <div class="sidebar">
+        <div class="side-header">
+            <h3><img src="../../static/assets/images/q.png" height="25px" width="25px"><span>uick Doc</span></h3>
+        </div>
+        
+        <div class="side-content">
+                <div class="profile">
+                    {% if request.session.img == "#" %}
+                    <div class="profile-img bg-img" style="background-image: url(../../static/assets/images/profile.webp);background-position: center;"></div>
+                    {% else %}
+                    <div class="profile-img bg-img" style="background-image: url('{{ request.session.img }}'); background-position: center;"></div>
+                    {% endif %}
+                   
+                <!-- <div class="profile-img bg-img" style="background-image: url(../../static/assets/images/profile.webp);background-position: center;"></div> -->
+                <h4>{{ request.session.name }}</h4>
+              
+            </div>
+
+            <div class="side-menu">
+                <ul>
+
+                    <li>
+                       <a href="" class="active">
+                            <span class="las la-home"></span>
+                            <small>Home Page</small>
+                        </a>
+                    </li>
+
+                    <li>
+                       <a href="/myuploads/">
+                            <span class="las la-file-alt"></span>
+                            <small>Uploads</small>
+                        </a>
+                    </li>
+                    <li>
+                       <a href="/viewProfile/">
+                            <span class="las la-user-alt"></span>
+                            <small>Profile</small>
+                        </a>
+                    </li>
+                    <!-- <li>
+                       <a href="">
+                            <span class="las la-heart"></span>
+                            <small>Favourite</small>
+                        </a>
+                    </li>
+                    <li>
+                       <a href="">
+                
+                            <span class="las la-sliders-h"></span>
+                            <small>Settings</small>
+                        </a>
+                    </li> -->
+                    <li>
+                       <a href="/logout/">
+                            <span class="las la-sign-out-alt"></span>
+                            <small>Signout</small>
+                        </a>
+                     
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        
+        <header>
+            <div class="header-content">
+                <label for="menu-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                
+                <div class="header-menu">
+                    <label for="">
+                      
+                    </label>
+                   
+
+                    
+                    
+                    <div class="user">
+                        <div class="bg-img" style="background-image: url()"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        
+        <main>
+            
+            <div class="page-header">
+                <h1>Hi, {{ request.session.name }}</h1>
+                <small>Welcome to QuickDoc</small>
+            </div>
+            
+
+         <form method="post" class="drop-form" action="/filupload/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="upload-doc"><p>Please drag here or</p></div>
+            <div id="dropArea" class="upload-doc-img-body">
+                <div class="upload-doc-img">
+                    <img  src="../../static/assets/images/select-file.png">
+                    <!-- <button id="fileButton">Select Document</button> -->
+                    <!-- <form method="post" action="/filupload/" enctype="multipart/form-data">
+                        {% csrf_token %} -->
+                        <div style="background-color: #2CBFAE;
+                        border: 1px solid rgba(27, 31, 35, .15);
+                        border-radius: 6px;color: white;margin-top: 20px;padding-top: 10px;padding-bottom: 10px;">
+                        <label style="padding: 15px;" for="myfile" >Select Document</label>
+                        <input type="file" name="myfile" id="myfile" onchange="this.form.submit()" style="display: none;" >
+                        </div>
+                    <!-- </form> -->
+                </div>
+            </div>
+         </form>
+
+         <script>
+            const dropArea = document.getElementById('dropArea');
+          
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+            });
+        
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        
+            // Highlight drop area
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+        
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+        
+            function highlight(e) {
+                dropArea.style.background = '#e1e7f0';
+            }
+        
+            function unhighlight(e) {
+                dropArea.style.background = '#fff';
+            }
+        
+            // Handle dropped files
+            dropArea.addEventListener('drop', handleDrop, false);
+        
+            function handleDrop(e) {
+                let dt = e.dataTransfer;
+                let files = dt.files;
+        
+                const fileInput = document.getElementById('myfile');
+                fileInput.files = files;
+        
+                document.querySelector('.drop-form').submit(); // Submit the form
+            }
+
+
+        </script>
+        
+    </div>           
+            </div>
+            
+        </main> 
+        
+    </div>
+    <script src="../../static/js/homepage.js"></script>
+    
+</body>
+</html>

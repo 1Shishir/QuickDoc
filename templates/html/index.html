@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Doc - A Effortless Document Management</title>
+
+  {% load static %}
+  <link rel="shortcut icon" href="static/assets/images/logo.png" type="image/svg+xml">
+  <link rel="stylesheet" href="static/css/style.css">
+
+  <!--- google font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body id="top">
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <div class="overlay" data-overlay></div>
+
+      <a href="./index.html" class="logo">
+        <img style="height: 50px;width: 50px;display: inline;" src="../../static/assets/images/logo.png" alt="quickdoc logo">
+      </a>
+
+      <div class="header-actions">
+
+    
+
+        <div class="lang-wrapper">
+          <label for="language">
+            <ion-icon name="globe-outline"></ion-icon>
+          </label>
+
+          <select name="language" id="language">
+            <option value="en">EN</option>
+            
+          </select>
+        </div>
+
+        <!-- <button class="btn btn-primary">Register</button> -->
+
+      </div>
+
+      <button class="menu-open-btn" data-menu-open-btn>
+        <ion-icon name="reorder-two"></ion-icon>
+      </button>
+
+      <nav class="navbar" data-navbar>
+
+        <div class="navbar-top">
+
+          <a href="./index.html" class="logo">
+            <img src="static/assets/images/logo.png" alt="quickdoc logo">
+          </a>
+
+          <button class="menu-close-btn" data-menu-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <ul class="navbar-list">
+
+        </ul>
+
+        <ul class="navbar-social-list">
+
+          <li>
+            <a href="#" class="navbar-social-link">
+              <ion-icon name="logo-twitter"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="navbar-social-link">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="navbar-social-link">
+              <ion-icon name="logo-pinterest"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="navbar-social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="navbar-social-link">
+              <ion-icon name="logo-youtube"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+    </div>
+  </header>
+
+
+
+
+
+  <main>
+    <article>
+
+      <!-- 
+        - #HERO
+      -->
+
+      <section class="hero">
+        <div class="container">
+
+          <div class="hero-content">
+
+            <p class="hero-subtitle">QuickDoc</p>
+
+            <h1 style="font-size: 50px;" class="h1 hero-title">
+              Streamline <strong>Documents</strong> with QuickDoc: Upload, Organize, and Simplify.
+            </h1>
+
+            <div class="meta-wrapper">
+
+              <div class="badge-wrapper">
+                <div class="badge badge-fill">Easy Upload</div>
+
+                <div class="badge badge-outline">Large Document</div>
+              </div>
+
+              <div class="ganre-wrapper">
+                <a href="#">Pdf,</a>
+
+                <a href="#">Zip</a>
+              </div>
+
+              <div class="date-time">
+
+                <div>
+                  <ion-icon name="document-text-outline"></ion-icon>
+
+                  <time datetime="2022">Documents</time>
+                </div>
+
+                <div>
+                  <ion-icon name="expand-outline"></ion-icon>
+                  <time datetime="PT128M">1 TB</time>
+                </div>
+
+              </div>
+
+            </div>
+            
+            <a href="/login/">
+            <button class="btn btn-primary">
+              <ion-icon name="cloud-upload-outline"></ion-icon>
+              <span>Upload Now</span>
+            </button>
+          </a>
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+
+      
+
+
+
+      <!-- 
+        - #SERVICE
+      -->
+
+      <section class="service">
+        <div class="container">
+
+          <div class="service-banner">
+            <figure>
+
+              <img style="height: 450px; width: 500px;margin-left: 10px;" src="static/assets/images/bg1.jpg" alt="HD 4k resolution! only $3.99">
+            </figure>
+
+            <a href="static/assets/images/bg1.jpg" download class="service-btn">
+              <span>Download</span>
+
+              <ion-icon name="download-outline"></ion-icon>
+            </a>
+          </div>
+
+          <div class="service-content">
+
+            <p class="service-subtitle">QuickDoc</p>
+
+            <h2 class="h2 service-title">Your Safe File Upload Destination.</h2>
+
+            <p class="service-text">
+              QuickDoc provides a secure and efficient platform for uploading and managing your important documents. Safeguard your 
+              files with confidence as you simplify your document management process. Experience peace of mind with QuickDoc.
+            </p>
+
+            <ul class="service-list">
+
+              <li>
+                <div class="service-card">
+
+                  <div class="card-icon">
+                    <ion-icon name="tv"></ion-icon>
+                  </div>
+
+                  <div class="card-content">
+                    <h3 class="h3 card-title">Upload high quality.</h3>
+
+                    <p class="card-text">
+                      QuickDoc elevate your document uploads with high quality and any resolution.
+                    </p>
+                  </div>
+
+                </div>
+              </li>
+
+              <li>
+                <div class="service-card">
+
+                  <div class="card-icon">
+                    <ion-icon name="cloud-download-outline"></ion-icon>
+                  </div>
+
+                  <div class="card-content">
+                    <h3 class="h3 card-title">Download Anywhere.</h3>
+
+                    <p class="card-text">
+                      Download your documents anytime, anywhere.
+                    </p>
+                  </div>
+
+                </div>
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+
+      
+
+
+
+
+
+
+
+      
+
+      <section class="cta">
+        <div class="container">
+
+          <div class="title-wrapper">
+            <h2 class="cta-title">Get important news from us.</h2>
+
+            <p class="cta-text">
+              Enter your email to create or restart your membership.
+            </p>
+          </div>
+
+          <form action="" class="cta-form">
+            <input type="email" name="email" required placeholder="Enter your email" class="email-field">
+
+            <button type="submit" class="cta-form-btn">Get started</button>
+          </form>
+
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer">
+
+    <div class="footer-top">
+      
+        <div class="divider"></div>
+
+        <div class="quicklink-wrapper">
+
+          <ul class="quicklink-list">
+
+            <li>
+              <a href="#" class="quicklink-link">Faq</a>
+            </li>
+
+            <li>
+              <a href="#" class="quicklink-link">Help center</a>
+            </li>
+
+            <li>
+              <a href="#" class="quicklink-link">Terms of use</a>
+            </li>
+
+            <li>
+              <a href="#" class="quicklink-link">Privacy</a>
+            </li>
+
+          </ul>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-pinterest"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+
+        <p class="copyright">
+          &copy; 2023 <a href="#">Quick Doc</a>. All Rights Reserved
+        </p>
+
+       
+      </div>
+    </div>
+
+  </footer>
+
+
+
+
+
+  <!-- 
+    - #GO TO TOP
+  -->
+
+  <a href="#top" class="go-top" data-go-top>
+    <ion-icon name="chevron-up"></ion-icon>
+  </a>
+
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="static/js/script.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
